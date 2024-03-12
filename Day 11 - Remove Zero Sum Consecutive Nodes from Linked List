@@ -1,0 +1,22 @@
+class Solution {
+public:
+    ListNode* removeZeroSumSublists(ListNode* head) {
+    if (head == nullptr)
+        return head;
+
+    ListNode* current = head;
+    int sum = 0;
+
+    while (current != nullptr) {
+        sum += current->val;
+        if (sum == 0) {
+            ListNode* temp = current->next;
+            return removeZeroSumSublists(temp);
+        }
+        current = current->next;
+    }
+
+    head->next = removeZeroSumSublists(head->next);
+    return head;
+}
+};
